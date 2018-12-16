@@ -18,8 +18,8 @@ class FilmWatcherApplication {
 
         repository.insert(
                 arrayListOf(
-                        Film(1, "Star Wars", LocalDate.now(), Provider("DVD")),
-                        Film(2, "Terminator", LocalDate.now(), Provider("Netflix")),
+                        Film(1, "Star Wars", LocalDate.of(1978,2,9), Provider("DVD")),
+                        Film(2, "Terminator", LocalDate.of(1985,3,11), Provider("Netflix")),
                         Film(3, "Zurück in die Zukunft", LocalDate.of(2018,11,5), Provider("DVD")))
 
         ).blockLast(Duration.ofSeconds(2))
