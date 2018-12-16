@@ -27,7 +27,6 @@ class FilmServiceTest {
 
         //then
 
-
         assertThat(findAllWatchedOn.toIterable().toList().size).isEqualTo(2)
     }
 }
