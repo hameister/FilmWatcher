@@ -1,3 +1,3 @@
 # FilmWatcher
 
-Simple reactive Sprin Boot Kotlin Application for storing watched videos.
+Simple reactive Spring Boot Kotlin Application for storing watched videos.
