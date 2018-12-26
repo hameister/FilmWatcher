@@ -16,8 +16,8 @@ class FilmServiceTest {
         // given
         val filmRepository:FilmRepository = mockk()
         val filmService:FilmService = FilmService(filmRepository)
-        val film1 : Film= Film(1,"test", LocalDate.now(), Provider("DVD"))
-        val film2 : Film= Film(2,"test", LocalDate.now(), Provider("DVD"))
+        val film1 : Film= Film(1,"test", Provider("DVD"))
+        val film2 : Film= Film(2,"test", Provider("DVD"))
 
         val filmFlux : Flux<Film> = Flux.just(film1, film2)
 

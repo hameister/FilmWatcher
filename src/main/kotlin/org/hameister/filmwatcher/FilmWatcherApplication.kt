@@ -1,5 +1,6 @@
 package org.hameister.filmwatcher
 
+import org.hameister.filmwatcher.business.JsonImporter
 import org.hameister.filmwatcher.data.FilmRepository
 import org.hameister.filmwatcher.domain.Film
 import org.hameister.filmwatcher.domain.Provider
@@ -14,15 +15,12 @@ import java.time.LocalDate
 class FilmWatcherApplication {
 
     @Bean
-    fun init(repository: FilmRepository)= CommandLineRunner {
+    fun init(repository: FilmRepository) = CommandLineRunner {
+        val importer = JsonImporter("/Users/hameister/Documents/github/FilmWatcher/src/main/resources/films.json")
+        importer.importFilms(repository)
 
-        repository.insert(
-                arrayListOf(
-                        Film(1, "Star Wars", LocalDate.of(1978,2,9), Provider("DVD")),
-                        Film(2, "Terminator", LocalDate.of(1985,3,11), Provider("Netflix")),
-                        Film(3, "Zurück in die Zukunft", LocalDate.of(2018,11,5), Provider("DVD")))
-
-        ).blockLast(Duration.ofSeconds(2))
+        val numberOfFilms =repository.findAll().toIterable().toList().size
+        println(numberOfFilms)
     }
 
 }

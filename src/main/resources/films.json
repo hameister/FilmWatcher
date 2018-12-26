@@ -1,0 +1,34 @@
+[
+  {
+    "id": 0,
+    "name": "Terminator",
+    "watchdate": "03.01.2018",
+    "provider": "DVD"
+  },
+  {
+    "id": 1,
+    "name": "Rambo 2",
+    "watchdate": "4.1.2018",
+    "provider": "DVD"
+  },
+  {
+    "id": 2,
+    "name": "Rambo 3",
+    "watchdate": "5.1.2018",
+    "provider": "DVD"
+  },
+  {
+    "id": 3,
+    "name": "Tatort: Willkommen in Hamburg",
+    "watchdate": "6.1.2018",
+    "provider": "DVD"
+  },
+  {
+    "id": 4,
+    "name": "Bones",
+    "watchdate": "8.12.2018",
+    "provider": "Amazon Video",
+    "seriesNo": "4",
+    "episodeNo": "1"
+  }
+]
