@@ -8,7 +8,6 @@ import org.hameister.filmwatcher.domain.Film
 import org.hameister.filmwatcher.domain.Provider
 import org.junit.Test
 import reactor.core.publisher.Flux
-import java.time.LocalDate
 
 class FilmServiceTest {
     @Test

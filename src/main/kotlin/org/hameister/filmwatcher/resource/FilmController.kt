@@ -24,4 +24,9 @@ class FilmController(private val filmService: FilmService) {
     fun findByProvider(@PathVariable id:String):Flux<Film> {
         return filmService.findAllWatchedOn(id)
     }
+
+    @GetMapping("film/year/{year}")
+    fun findByYear(@PathVariable year:String):Flux<Film> {
+        return filmService.findByYear(year.toInt())
+    }
 }

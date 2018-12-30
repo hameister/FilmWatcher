@@ -6,12 +6,13 @@ import org.hameister.filmwatcher.domain.Provider
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
+import java.time.LocalDate
 
 @Service
-class FilmService( val filmRepository: FilmRepository) {
+class FilmService(val filmRepository: FilmRepository) {
 
-    fun findAll():Flux<Film> = filmRepository.findAll()
-    fun findById(id : Long) : Mono<Film> = filmRepository.findById(id)
+    fun findAll(): Flux<Film> = filmRepository.findAll()
+    fun findById(id: Long): Mono<Film> = filmRepository.findById(id)
 
 
     fun findAllWatchedOnDvd(): Flux<Film> {
@@ -22,11 +23,18 @@ class FilmService( val filmRepository: FilmRepository) {
         return filmRepository.findByProvider(Provider("Netflix"))
     }
 
-    fun  findAllWatchedOn( provider:String) : Flux<Film>{
-        when(provider){
+    fun findAllWatchedOn(provider: String): Flux<Film> {
+        when (provider) {
             "DVD" -> return findAllWatchedOnDvd()
             "Netflix" -> return findAllWatchedOnNetflix()
         }
         return Flux.empty()
+    }
+
+    fun findByYear(year: Int): Flux<Film> {
+        val start: LocalDate = LocalDate.of(year,1,1)
+        val endDate: LocalDate= LocalDate.of(year,12,31)
+
+        return filmRepository.findFilmByWatchdateBetween(start,endDate)
     }
 }
