@@ -31,6 +31,11 @@ class FilmService(val filmRepository: FilmRepository) {
         return Flux.empty()
     }
 
+    fun importFilms(films :Flux<Film>):Flux<Film> {
+        println("Import Films")
+        return filmRepository.insert(films)
+    }
+
     fun findByYear(year: Int): Flux<Film> {
         val start: LocalDate = LocalDate.of(year,1,1)
         val endDate: LocalDate= LocalDate.of(year,12,31)

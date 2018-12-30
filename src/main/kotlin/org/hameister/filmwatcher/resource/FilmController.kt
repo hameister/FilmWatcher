@@ -1,12 +1,8 @@
 package org.hameister.filmwatcher.resource
 
 import org.hameister.filmwatcher.business.FilmService
-import org.hameister.filmwatcher.data.FilmRepository
 import org.hameister.filmwatcher.domain.Film
-import org.hameister.filmwatcher.domain.Provider
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
@@ -28,5 +24,11 @@ class FilmController(private val filmService: FilmService) {
     @GetMapping("film/year/{year}")
     fun findByYear(@PathVariable year:String):Flux<Film> {
         return filmService.findByYear(year.toInt())
+    }
+
+    @PostMapping("/film")
+    fun importFilms(@RequestBody films:Flux<Film>): Flux<Film>{
+        println("Controller import films")
+        return filmService.importFilms(films)
     }
 }

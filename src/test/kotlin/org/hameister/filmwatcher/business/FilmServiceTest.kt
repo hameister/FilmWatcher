@@ -25,7 +25,6 @@ class FilmServiceTest {
         val findAllWatchedOn = filmService.findAllWatchedOn("DVD")
 
         //then
-
         assertThat(findAllWatchedOn.toIterable().toList().size).isEqualTo(2)
     }
 }
