@@ -1,5 +1,6 @@
 package org.hameister.filmwatcher.resource
 
+import org.bson.types.ObjectId
 import org.hameister.filmwatcher.business.FilmService
 import org.hameister.filmwatcher.domain.Film
 import org.springframework.web.bind.annotation.*
@@ -13,7 +14,7 @@ class FilmController(private val filmService: FilmService) {
     fun readAll(): Flux<Film> = filmService.findAll()
 
     @GetMapping("/film/{id}")
-    fun readOne(@PathVariable id :Long): Mono<Film> = filmService.findById(id)
+    fun readOne(@PathVariable id :ObjectId): Mono<Film> = filmService.findById(id)
 
 
     @GetMapping("film/provider/{id}")

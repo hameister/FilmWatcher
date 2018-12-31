@@ -1,5 +1,6 @@
 package org.hameister.filmwatcher.business
 
+import org.bson.types.ObjectId
 import org.hameister.filmwatcher.data.FilmRepository
 import org.hameister.filmwatcher.domain.Film
 import org.hameister.filmwatcher.domain.Provider
@@ -12,7 +13,7 @@ import java.time.LocalDate
 class FilmService(val filmRepository: FilmRepository) {
 
     fun findAll(): Flux<Film> = filmRepository.findAll()
-    fun findById(id: Long): Mono<Film> = filmRepository.findById(id)
+    fun findById(id: ObjectId): Mono<Film> = filmRepository.findById(id)
 
 
     fun findAllWatchedOnDvd(): Flux<Film> {

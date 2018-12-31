@@ -67,9 +67,23 @@ public class FilmWatcherTestContainersIntegrationTest {
 
 
     @Test
+    public void checkId() {
+
+        Film film = new Film( "Star Wars", new Provider("MyDVD"));
+        LocalDate watched = LocalDate.of(2018, 12, 31);
+        film.setWatchdate(watched);
+
+        Mono<Film> saved = filmRepository.save(film);
+
+        Film block = saved.block();
+
+        Assertions.assertNotNull(block.getId());
+    }
+
+
+    @Test
     public void aSavedFilmShouldBeFound() {
-        Long uniqueID = UUID.randomUUID().getMostSignificantBits();
-        Film film = new Film(uniqueID, "Star Wars", new Provider("MyDVD"));
+        Film film = new Film( "Star Wars", new Provider("MyDVD"));
         LocalDate watched = LocalDate.of(2018, 12, 31);
         film.setWatchdate(watched);
 
@@ -84,23 +98,15 @@ public class FilmWatcherTestContainersIntegrationTest {
 
     }
 
-    @Test
-    public void aSavedFilmShouldBeFoundViaRestController() {
-        RestTemplate restTemplate = new RestTemplate();
-        String url = "http://" + mongoIp + ":" + springbootPort + "/film/0";
-        ResponseEntity<Film> forObject = restTemplate.getForEntity(url, Film.class);
-        Film film = forObject.getBody();
-        Assertions.assertEquals(film.getName(), "Terminator");
-    }
 
     @Test
     public void importedFilmsViaRestControllerShouldStoredInDB() {
         //Given
         Long uniqueID = UUID.randomUUID().getMostSignificantBits();
         List<Film> films = new ArrayList<>();
-        films.add(new Film(uniqueID, "Star Wars", new Provider("MyDVD2")));
-        films.add(new Film(uniqueID + 1, "Star Wars II", new Provider("MyDVD2")));
-        films.add(new Film(uniqueID + 2, "Star Wars III", new Provider("MyDVD2")));
+        films.add(new Film("Star Wars", new Provider("MyDVD2")));
+        films.add(new Film( "Star Wars II", new Provider("MyDVD2")));
+        films.add(new Film( "Star Wars III", new Provider("MyDVD2")));
         HttpEntity<List<Film>> request = new HttpEntity<>(films);
         RestTemplate restTemplate = new RestTemplate();
         String url = "http://" + mongoIp + ":" + springbootPort + "/film";
@@ -140,17 +146,17 @@ public class FilmWatcherTestContainersIntegrationTest {
         Long uniqueID = UUID.randomUUID().getMostSignificantBits();
         List<Film> films = new ArrayList<>();
         for (int i = 1; i < 11; i++) {
-            Film f = new Film(uniqueID + i, "Film" + i, new Provider("DVD" + i));
+            Film f = new Film( "Film" + i, new Provider("DVD" + i));
             f.setWatchdate(LocalDate.of(2017, 10, 1));
 
             films.add(f);
         }
 
-        Film f = new Film(uniqueID+20, "Star Wars", new Provider("MyDVD2"));
+        Film f = new Film( "Star Wars", new Provider("MyDVD2"));
         f.setWatchdate(LocalDate.of(2018, 9, 4));
         films.add(f);
 
-        Film f2 = new Film(uniqueID+21, "Star Trek", new Provider("MyDVD2"));
+        Film f2 = new Film( "Star Trek", new Provider("MyDVD2"));
         f2.setWatchdate(LocalDate.of(2025, 7, 15));
         films.add(f2);
 
