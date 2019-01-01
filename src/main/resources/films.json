@@ -2,12 +2,14 @@
   {
     "name": "Terminator",
     "watchdate": "03.01.2018",
-    "provider": "DVD"
+    "provider": "DVD",
+    "duration": 6420
   },
   {
     "name": "Rambo 2",
     "watchdate": "4.1.2018",
-    "provider": "DVD"
+    "provider": "DVD",
+    "duration": "PT96M"
   },
   {
     "name": "Rambo 3",
