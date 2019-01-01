@@ -27,6 +27,11 @@ class FilmController(private val filmService: FilmService) {
         return filmService.findByYear(year.toInt())
     }
 
+    @GetMapping("film/name/{name}")
+    fun findByName(@PathVariable name:String) :Flux<Film>{
+        return  filmService.findByName(name)
+    }
+
     @PostMapping("/film")
     fun importFilms(@RequestBody films:Flux<Film>): Flux<Film>{
         println("Controller import films")

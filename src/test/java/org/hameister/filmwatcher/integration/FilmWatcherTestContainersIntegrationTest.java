@@ -143,7 +143,6 @@ public class FilmWatcherTestContainersIntegrationTest {
     }
 
     private void importTestdataSet() {
-        Long uniqueID = UUID.randomUUID().getMostSignificantBits();
         List<Film> films = new ArrayList<>();
         for (int i = 1; i < 11; i++) {
             Film f = new Film( "Film" + i, new Provider("DVD" + i));
@@ -166,5 +165,40 @@ public class FilmWatcherTestContainersIntegrationTest {
 
         restTemplate.exchange(url, HttpMethod.POST, request, List.class);
 
+    }
+
+    @Test
+    public void  searchByName() {
+        // Given
+        List<Film> films = new ArrayList<>();
+        Film f = new Film( "Star Wars", new Provider("MyDVD2"));
+        f.setWatchdate(LocalDate.of(2019, 9, 4));
+        films.add(f);
+
+        Film f2 = new Film( "Star Trek", new Provider("MyDVD2"));
+        f2.setWatchdate(LocalDate.of(2024, 7, 15));
+        films.add(f2);
+
+        HttpEntity<List<Film>> request = new HttpEntity<>(films);
+        RestTemplate restTemplate = new RestTemplate();
+        String url = "http://" + mongoIp + ":" + springbootPort + "/film";
+
+        restTemplate.exchange(url, HttpMethod.POST, request, List.class);
+
+        //When
+        List<Film> star_wars = findByName("Star Trek");
+
+        //Then
+        Assertions.assertEquals(1, star_wars.size());
+
+    }
+
+    private List<Film> findByName(String name) {
+        RestTemplate restTemplate = new RestTemplate();
+        String url = "http://" + mongoIp + ":" + springbootPort + "/film/name/" + name;
+
+        ResponseEntity<List> forObject = restTemplate.getForEntity(url, List.class);
+        List<Film> filmList = forObject.getBody();
+        return filmList;
     }
 }

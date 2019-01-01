@@ -11,6 +11,7 @@ import java.time.LocalDate
 interface FilmRepository: ReactiveMongoRepository<Film, ObjectId> {
     fun findByProvider( provider: Provider):Flux<Film>
     fun  findFilmByWatchdateBetween(start:LocalDate, end:LocalDate): Flux<Film>
+    fun findByName(name:String):Flux<Film>
 }
 
 

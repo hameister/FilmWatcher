@@ -43,4 +43,8 @@ class FilmService(val filmRepository: FilmRepository) {
 
         return filmRepository.findFilmByWatchdateBetween(start,endDate)
     }
+
+    fun findByName(name: String): Flux<Film> {
+        return filmRepository.findByName(name)
+    }
 }
